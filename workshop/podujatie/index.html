@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Večer s AI · 5. 12. 2026 · Stará tržnica Bratislava</title>
+<meta name="description" content="Pozvánka na podujatie Večer s AI: ako umelá inteligencia pomáha v práci. Sobota 5. 12. 2026 o 18:00, Stará tržnica, Bratislava.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Vizuálny smer: oceľová klenba Starej tržnice (1910) ako neurónová sieť.
+     Teplý papier, atramentová modrá, signálna oranžová, patinová zelená. */
+  :root {
+    --paper: #f6f2ea;
+    --paper-2: #efe9dd;
+    --card: #fffdf9;
+    --ink: #16203a;
+    --ink-2: #3d4660;
+    --muted: #6b6f7d;
+    --line: #e3dccd;
+    --signal: #e4572e;
+    --signal-dark: #c8431d;
+    --signal-soft: #fde8df;
+    --patina: #2a7f72;
+    --patina-soft: #dcefeb;
+    --radius: 18px;
+    --shadow: 0 1px 0 rgba(22, 32, 58, .04), 0 10px 30px -12px rgba(22, 32, 58, .18);
+    --head: "Space Grotesk", system-ui, sans-serif;
+    --body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: var(--body); font-size: 17px; line-height: 1.6;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: var(--patina); }
+  :focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; border-radius: 6px; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+  h1, h2, h3 { font-family: var(--head); color: var(--ink); margin: 0; letter-spacing: -.02em; }
+
+  .label {
+    font-family: var(--head); font-weight: 600; font-size: 13px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--signal); display: inline-flex; align-items: center; gap: 10px; margin: 0 0 14px;
+  }
+  .label::before { content: ""; width: 22px; height: 2px; background: currentColor; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+    background: var(--signal); color: #fff; text-decoration: none;
+    font-family: var(--head); font-weight: 600; font-size: 17px; letter-spacing: .01em;
+    padding: 14px 26px; border-radius: 14px; min-height: 48px;
+    box-shadow: 0 2px 0 var(--signal-dark), 0 10px 22px -8px rgba(228, 87, 46, .55);
+  }
+  .btn:hover { background: var(--signal-dark); }
+  .btn-ghost {
+    background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink);
+    padding: 10px 18px; font-size: 15px; min-height: 42px; border-radius: 12px;
+  }
+  .btn-ghost:hover { background: var(--ink); color: #fff; }
+
+  /* Hlavička */
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 22px; padding-bottom: 22px; }
+  .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); font-family: var(--head); font-weight: 700; font-size: 19px; }
+
+  /* Úvod */
+  .hero { position: relative; padding: 24px 0 72px; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+  .hero h1 { font-size: clamp(52px, 8.4vw, 112px); line-height: .92; letter-spacing: -.045em; font-weight: 700; margin-bottom: 26px; }
+  .hero h1 em { font-style: normal; color: var(--signal); }
+  .hero .lead { font-size: 20px; color: var(--ink-2); max-width: 520px; margin: 0 0 32px; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: center; }
+  .hero-actions small { color: var(--muted); font-size: 15px; }
+
+  .arch-wrap { position: relative; }
+  .arch { width: 100%; height: auto; }
+
+  /* Vstupenka s dátumom */
+  .ticket {
+    position: relative; display: grid; grid-template-columns: 1.35fr auto 1fr; align-items: stretch;
+    background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+    margin-top: 48px; border: 1px solid var(--line);
+  }
+  .ticket-main { padding: 34px 38px; display: flex; gap: 30px; align-items: center; }
+  .bigdate { font-family: var(--head); font-weight: 700; line-height: .85; letter-spacing: -.05em; color: var(--ink); }
+  .bigdate .d { font-size: 120px; display: block; }
+  .bigdate .m { font-size: 22px; letter-spacing: .02em; color: var(--signal); display: block; margin-top: 10px; }
+  .ticket-main h2 { font-size: 26px; margin-bottom: 6px; }
+  .ticket-main p { margin: 0; color: var(--ink-2); }
+  .clock-row { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+  .time-chip { font-family: var(--head); font-weight: 700; font-size: 30px; letter-spacing: -.02em; }
+
+  .perf { width: 0; border-left: 2px dashed var(--line); margin: 18px 0; position: relative; }
+  .perf::before, .perf::after {
+    content: ""; position: absolute; left: -15px; width: 28px; height: 28px; border-radius: 50%; background: var(--paper);
+    border: 1px solid var(--line);
+  }
+  .perf::before { top: -33px; clip-path: inset(50% 0 0 0); }
+  .perf::after { bottom: -33px; clip-path: inset(0 0 50% 0); }
+
+  .ticket-side { padding: 30px 36px; display: grid; gap: 16px; align-content: center; }
+  .fact { display: grid; grid-template-columns: 40px 1fr; gap: 14px; align-items: start; }
+  .fact .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; background: var(--paper-2); }
+  .fact strong { display: block; font-weight: 600; line-height: 1.35; }
+  .fact span { color: var(--muted); font-size: 15px; }
+
+  /* Sekcie */
+  section.block { padding: 72px 0; }
+  .head { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: end; margin-bottom: 40px; }
+  .head h2 { font-size: clamp(34px, 4.6vw, 52px); line-height: 1.02; letter-spacing: -.035em; }
+  .head p { margin: 0; color: var(--ink-2); font-size: 18px; max-width: 460px; }
+
+  /* Program – časová os */
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; position: relative; }
+  .timeline::before { content: ""; position: absolute; left: 87px; top: 30px; bottom: 30px; width: 2px; background: repeating-linear-gradient(var(--line) 0 8px, transparent 8px 14px); }
+  .slot { display: grid; grid-template-columns: 70px 36px 1fr; gap: 0 18px; align-items: start; }
+  .slot time { font-family: var(--head); font-weight: 700; font-size: 22px; letter-spacing: -.02em; padding-top: 30px; text-align: right; }
+  .slot .dot { width: 16px; height: 16px; border-radius: 50%; background: var(--paper); border: 3px solid var(--signal); margin: 36px 0 0 3px; position: relative; z-index: 1; }
+  .slot .card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 28px 32px; display: grid; grid-template-columns: 72px 1fr auto; gap: 24px; align-items: center; }
+  .slot .card h3 { font-size: 23px; margin-bottom: 6px; }
+  .slot .card p { margin: 0; color: var(--ink-2); }
+  .slot .num { font-family: var(--head); font-weight: 700; font-size: 15px; color: var(--muted); letter-spacing: .1em; align-self: start; }
+  .slot.pause .card { background: transparent; box-shadow: none; border-style: dashed; padding: 16px 32px; grid-template-columns: 1fr; }
+  .slot.pause .card p { color: var(--muted); }
+  .slot.pause .dot { border-color: var(--patina); margin-top: 22px; }
+  .slot.pause time { padding-top: 16px; color: var(--muted); font-size: 18px; }
+
+  /* Miesto */
+  .venue { display: grid; grid-template-columns: 1.2fr .8fr; background: var(--card); border: 1px solid var(--line); border-radius: 24px; box-shadow: var(--shadow); overflow: hidden; }
+  .venue-media { position: relative; min-height: 380px; background: var(--paper-2); }
+  .venue-media img, .venue-media .fallback { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .venue-media .fallback { display: none; }
+  .venue-media.failed img { display: none; }
+  .venue-media.failed .fallback { display: block; }
+  .venue-body { padding: 44px 40px; display: flex; flex-direction: column; justify-content: center; }
+  .venue-body h2 { font-size: clamp(30px, 3.6vw, 40px); line-height: 1.05; letter-spacing: -.03em; margin-bottom: 14px; }
+  .venue-body p { color: var(--ink-2); margin: 0 0 22px; }
+  .venue-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 20px; }
+  .venue-list li { display: flex; justify-content: space-between; gap: 16px; font-size: 15px; }
+  .venue-list li span:first-child { color: var(--muted); }
+  .venue-list li span:last-child { font-weight: 600; text-align: right; }
+
+  /* Výzva */
+  .cta { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 28px; box-shadow: var(--shadow);
+    padding: 64px 56px; display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: center; overflow: hidden; }
+  .cta h2 { font-size: clamp(36px, 5vw, 60px); line-height: .98; letter-spacing: -.04em; margin-bottom: 14px; }
+  .cta p { margin: 0; color: var(--ink-2); font-size: 18px; max-width: 520px; }
+  .cta .btn { font-size: 21px; padding: 22px 40px; border-radius: 18px; }
+  .cta-side { display: grid; gap: 12px; justify-items: center; position: relative; }
+  .cta-side small { color: var(--muted); font-size: 14px; }
+  .cta-arch { position: absolute; right: -40px; top: -60px; width: 420px; opacity: .55; pointer-events: none; }
+  .cta > div:first-child { position: relative; }
+  .seats { display: inline-flex; align-items: center; gap: 10px; background: var(--patina-soft); color: var(--patina); font-weight: 600; font-size: 14px; padding: 6px 14px; border-radius: 999px; margin-bottom: 20px; }
+
+  footer { padding: 44px 0 52px; font-size: 14px; color: var(--muted); }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 28px; border-top: 1px solid var(--line); padding-top: 26px; }
+  footer .credit { font-size: 13px; max-width: 640px; }
+
+  /* Responzivita */
+  @media (max-width: 1000px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 8px; }
+    .arch-wrap { max-width: 560px; margin: 0 auto; width: 100%; order: -1; }
+    .ticket { grid-template-columns: 1fr; margin-top: 32px; }
+    .perf { width: auto; height: 0; border-left: 0; border-top: 2px dashed var(--line); margin: 0 18px; }
+    .perf::before { top: -15px; left: -33px; clip-path: inset(0 0 0 50%); }
+    .perf::after { top: -15px; bottom: auto; left: auto; right: -33px; clip-path: inset(0 50% 0 0); }
+    .venue { grid-template-columns: 1fr; }
+    .venue-media { min-height: 0; aspect-ratio: 16 / 10; }
+    .head { grid-template-columns: 1fr; gap: 14px; }
+    .cta { grid-template-columns: 1fr; }
+    .cta-side { justify-items: start; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .wrap { padding: 0 18px; }
+    .topbar .btn-ghost { display: none; }
+    .hero { padding: 0 0 48px; }
+    .hero .lead { font-size: 18px; }
+    .hero-actions .btn { width: 100%; }
+    .ticket-main { padding: 26px 24px; gap: 18px; flex-direction: column; align-items: flex-start; }
+    .bigdate { display: flex; align-items: baseline; gap: 12px; }
+    .bigdate .m { margin-top: 0; }
+    .bigdate .d { font-size: 92px; }
+    .ticket-side { padding: 24px; }
+    section.block { padding: 52px 0; }
+    .timeline::before { left: 7px; top: 12px; }
+    .slot { grid-template-columns: 22px 1fr; gap: 6px 14px; }
+    .slot .dot { grid-row: 1; grid-column: 1; margin: 6px 0 0 0; }
+    .slot time { grid-row: 1; grid-column: 2; padding-top: 0; text-align: left; font-size: 20px; }
+    .slot .card { grid-column: 2; grid-template-columns: 1fr; gap: 14px; padding: 22px; }
+    .slot .card svg { width: 54px; height: 54px; }
+    .slot .num { display: none; }
+    .slot.pause .card { padding: 14px 18px; }
+    .slot.pause .dot { margin-top: 4px; }
+    .venue-body { padding: 28px 22px; }
+    .cta { padding: 40px 22px; border-radius: 22px; }
+    .cta .btn { width: 100%; }
+    .cta-side { justify-items: stretch; text-align: center; }
+    .cta-arch { width: 300px; right: -90px; top: -40px; opacity: .35; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#">
+      <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+        <rect width="36" height="36" rx="10" fill="#16203a"/>
+        <path d="M8 28V18a10 10 0 0 1 20 0v10" fill="none" stroke="#f6f2ea" stroke-width="2.2"/>
+        <circle cx="8" cy="18" r="2.6" fill="#f6f2ea"/><circle cx="18" cy="8" r="2.6" fill="#e4572e"/><circle cx="28" cy="18" r="2.6" fill="#f6f2ea"/>
+      </svg>
+      Večer s AI
+    </a>
+    <a class="btn btn-ghost" href="#">Prihlásiť sa</a>
+  </div>
+</header>
+
+<main>
+  <!-- ÚVOD -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <p class="label">Pozvánka · vstup voľný</p>
+          <h1>Večer<br>s <em>AI</em></h1>
+          <p class="lead">Tri hodiny o tom, ako umelá inteligencia šetrí čas pri bežnej práci. Žiadne sľuby o budúcnosti, len postupy, ktoré si zajtra ráno vyskúšate sami.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#">Prihlásiť sa
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <small>120 miest · registrácia nutná</small>
+          </div>
+        </div>
+
+        <!-- Vlastná grafika: klenba tržnice ako neurónová sieť -->
+        <div class="arch-wrap">
+          <svg class="arch" viewBox="0 0 560 520" role="img" aria-label="Abstraktná grafika: oceľová klenba haly, ktorej uzly sú prepojené ako neurónová sieť">
+            <defs>
+              <radialGradient id="sun" cx="50%" cy="58%" r="50%">
+                <stop offset="0" stop-color="#fde8df"/>
+                <stop offset="1" stop-color="#f6f2ea" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="560" height="520" fill="url(#sun)"/>
+
+            <!-- podlaha / horizont -->
+            <path d="M20 470H540" stroke="#16203a" stroke-width="2"/>
+            <path d="M60 486H500" stroke="#16203a" stroke-opacity=".25" stroke-width="1.5" stroke-dasharray="2 8"/>
+
+            <!-- tri oblúky klenby -->
+            <g fill="none" stroke="#16203a" stroke-linecap="round">
+              <path d="M60 470V250A220 200 0 0 1 500 250V470" stroke-width="2.4"/>
+              <path d="M120 470V265A160 150 0 0 1 440 265V470" stroke-width="1.6" stroke-opacity=".55"/>
+              <path d="M180 470V280A100 100 0 0 1 380 280V470" stroke-width="1.2" stroke-opacity=".35"/>
+            </g>
+
+            <!-- priehradová konštrukcia ako spoje siete -->
+            <g stroke="#16203a" stroke-opacity=".28" stroke-width="1.1" fill="none">
+              <path d="M60 250L120 265M85 160L120 265M85 160L160 170M160 170L180 280M160 170L230 118M230 118L280 180M280 50L280 180M330 118L280 180
+                       M330 118L400 170M400 170L380 280M400 170L475 160M475 160L440 265M500 250L440 265
+                       M120 265L180 280M440 265L380 280M180 280L280 180M380 280L280 180M230 118L280 50M330 118L280 50"/>
+            </g>
+
+            <!-- zvýraznená cesta signálu -->
+            <path d="M60 250L85 160L160 170L230 118L280 50L330 118L400 170L440 265L500 250" fill="none" stroke="#e4572e" stroke-width="2.8" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M280 180L280 330" stroke="#2a7f72" stroke-width="2.4" stroke-dasharray="3 6" stroke-linecap="round"/>
+
+            <!-- uzly -->
+            <g fill="#fffdf9" stroke="#16203a" stroke-width="2">
+              <circle cx="120" cy="265" r="6"/><circle cx="180" cy="280" r="6"/><circle cx="380" cy="280" r="6"/><circle cx="440" cy="265" r="7"/>
+              <circle cx="280" cy="180" r="9"/>
+            </g>
+            <g fill="#e4572e">
+              <circle cx="60" cy="250" r="7"/><circle cx="85" cy="160" r="7"/><circle cx="160" cy="170" r="7"/><circle cx="230" cy="118" r="7"/>
+              <circle cx="330" cy="118" r="7"/><circle cx="400" cy="170" r="7"/><circle cx="475" cy="160" r="7"/><circle cx="500" cy="250" r="7"/>
+            </g>
+            <circle cx="280" cy="50" r="20" fill="#e4572e" fill-opacity=".16"/>
+            <circle cx="280" cy="50" r="11" fill="#e4572e"/>
+            <circle cx="280" cy="180" r="4" fill="#16203a"/>
+
+            <!-- „tabuľa“ dole: výstup siete -->
+            <rect x="222" y="330" width="116" height="74" rx="12" fill="#fffdf9" stroke="#16203a" stroke-width="2"/>
+            <path d="M240 352h80M240 368h56M240 384h68" stroke="#2a7f72" stroke-width="3" stroke-linecap="round"/>
+            <path d="M262 404l-12 66M298 404l12 66" stroke="#16203a" stroke-width="1.6" stroke-opacity=".5"/>
+
+            <!-- drobné body ako svetlá haly -->
+            <g fill="#16203a" fill-opacity=".35">
+              <circle cx="40" cy="120" r="2"/><circle cx="520" cy="110" r="2"/><circle cx="150" cy="70" r="1.6"/><circle cx="420" cy="62" r="1.6"/>
+              <circle cx="530" cy="360" r="2"/><circle cx="30" cy="370" r="2"/>
+            </g>
+            <rect x="488" y="300" width="26" height="26" rx="6" fill="none" stroke="#2a7f72" stroke-width="1.6" transform="rotate(16 501 313)"/>
+            <path d="M44 300l14 24h-28z" fill="none" stroke="#e4572e" stroke-width="1.6"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Vstupenka: dátum a čas -->
+      <div class="ticket" role="group" aria-label="Dátum, čas a miesto">
+        <div class="ticket-main">
+          <div class="bigdate" aria-hidden="true"><span class="d">05</span><span class="m">DEC 2026</span></div>
+          <div>
+            <h2>Sobota 5. decembra 2026</h2>
+            <p>Začiatok o 18:00, koniec okolo 21:00</p>
+            <div class="clock-row">
+              <svg width="38" height="38" viewBox="0 0 40 40" aria-hidden="true">
+                <circle cx="20" cy="20" r="17" fill="#fde8df" stroke="#e4572e" stroke-width="2.5"/>
+                <path d="M20 10v10" stroke="#16203a" stroke-width="2.6" stroke-linecap="round"/>
+                <path d="M20 20h8" stroke="#16203a" stroke-width="2.6" stroke-linecap="round"/>
+                <circle cx="20" cy="20" r="2.4" fill="#e4572e"/>
+              </svg>
+              <span class="time-chip">18:00</span>
+            </div>
+          </div>
+        </div>
+        <div class="perf" aria-hidden="true"></div>
+        <div class="ticket-side">
+          <div class="fact">
+            <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16203a" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
+            <div><strong>Stará tržnica, sála na galérii</strong><span>Námestie SNP 25, Bratislava</span></div>
+          </div>
+          <div class="fact">
+            <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16203a" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 8h12v6a5 5 0 0 1-5 5h-2a5 5 0 0 1-5-5z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17M9 3v2M13 3v2"/></svg></span>
+            <div><strong>17:30 otvorenie dverí</strong><span>káva, čaj a registrácia</span></div>
+          </div>
+          <div class="fact">
+            <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#16203a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9V6a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3a3 3 0 0 0 0 6v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-3a3 3 0 0 0 0-6z"/><path d="M14 5v14" stroke-dasharray="2 3"/></svg></span>
+            <div><strong>Vstup voľný</strong><span>po registrácii, 120 miest</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROGRAM -->
+  <section class="block" id="program">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <p class="label">Program</p>
+          <h2>Štyri spôsoby, ako vám AI uľahčí prácu</h2>
+        </div>
+        <p>Každý blok stojí na úlohe, ktorú poznáte z vlastného dňa. Ukážky robíme naživo a po každej je priestor na otázky.</p>
+      </div>
+
+      <ol class="timeline">
+        <li class="slot">
+          <time>18:15</time><span class="dot" aria-hidden="true"></span>
+          <div class="card">
+            <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
+              <rect width="72" height="72" rx="20" fill="#fde8df"/>
+              <rect x="16" y="22" width="34" height="26" rx="5" fill="#fffdf9" stroke="#16203a" stroke-width="2.4"/>
+              <path d="M16 27l17 11 17-11" fill="none" stroke="#16203a" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M50 44l6-6 4 4-6 6h-4z" fill="#e4572e"/>
+              <path d="M30 54h22" stroke="#e4572e" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+            <div>
+              <h3>E-maily a texty za polovicu času</h3>
+              <p>Prvá verzia odpovede, zhrnutie dlhého vlákna a úprava tónu tak, aby text stále znel ako vy.</p>
+            </div>
+            <span class="num">01</span>
+          </div>
+        </li>
+
+        <li class="slot">
+          <time>18:45</time><span class="dot" aria-hidden="true"></span>
+          <div class="card">
+            <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
+              <rect width="72" height="72" rx="20" fill="#dcefeb"/>
+              <rect x="16" y="18" width="40" height="36" rx="5" fill="#fffdf9" stroke="#16203a" stroke-width="2.4"/>
+              <path d="M16 28h40M30 18v36" stroke="#16203a" stroke-width="1.6" stroke-opacity=".4"/>
+              <path d="M35 47v-6M42 47V36M49 47v-9" stroke="#2a7f72" stroke-width="3.6" stroke-linecap="round"/>
+              <path d="M20 35h6M20 41h6M20 47h6" stroke="#16203a" stroke-width="2" stroke-linecap="round" stroke-opacity=".5"/>
+            </svg>
+            <div>
+              <h3>Tabuľky a dáta bez vzorcov</h3>
+              <p>Opýtate sa tabuľky obyčajnou vetou. Ukážeme triedenie, čistenie údajov a graf pre poradu za pár minút.</p>
+            </div>
+            <span class="num">02</span>
+          </div>
+        </li>
+
+        <li class="slot pause">
+          <time>19:15</time><span class="dot" aria-hidden="true"></span>
+          <div class="card"><p>Prestávka · káva a niečo malé pod zub</p></div>
+        </li>
+
+        <li class="slot">
+          <time>19:30</time><span class="dot" aria-hidden="true"></span>
+          <div class="card">
+            <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
+              <rect width="72" height="72" rx="20" fill="#efe9dd"/>
+              <path d="M22 15h20l9 9v30a3 3 0 0 1-3 3H22a3 3 0 0 1-3-3V18a3 3 0 0 1 3-3z" fill="#fffdf9" stroke="#16203a" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M42 15v9h9" fill="none" stroke="#16203a" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M26 32h18M26 39h14M26 46h9" stroke="#16203a" stroke-width="2.4" stroke-linecap="round" stroke-opacity=".45"/>
+              <circle cx="50" cy="50" r="10" fill="#e4572e"/>
+              <path d="M45.5 50l3 3 6-6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div>
+              <h3>Dokumenty, zmluvy a porady</h3>
+              <p>Zhrnutie dlhých dokumentov, kontrola, či niečo nechýba, a zápisnica z porady hotová skôr, ako odídete od stola.</p>
+            </div>
+            <span class="num">03</span>
+          </div>
+        </li>
+
+        <li class="slot">
+          <time>20:00</time><span class="dot" aria-hidden="true"></span>
+          <div class="card">
+            <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
+              <rect width="72" height="72" rx="20" fill="#dcefeb"/>
+              <path d="M36 14l16 6v12c0 11-7 19-16 23-9-4-16-12-16-23V20z" fill="#fffdf9" stroke="#16203a" stroke-width="2.4" stroke-linejoin="round"/>
+              <path d="M29 35l5 5 9-10" fill="none" stroke="#2a7f72" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div>
+              <h3>Bezpečne a s rozumom</h3>
+              <p>Čo do AI nevkladať, ako overiť výsledok a ako zaviesť jednoduché pravidlá pre celý tím. Na záver otvorená diskusia.</p>
+            </div>
+            <span class="num">04</span>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- MIESTO -->
+  <section class="block" id="miesto" style="padding-top:0">
+    <div class="wrap">
+      <div class="venue">
+        <div class="venue-media" id="venueMedia">
+          <img src="obrazky/stara-trznica.jpg"
+               alt="Interiér Starej tržnice v Bratislave: oceľové oblúky strechy a galéria"
+               width="1280" height="937" loading="lazy"
+               onerror="this.parentNode.classList.add('failed')">
+          <!-- Náhrada, ak sa fotka nenačíta -->
+          <svg class="fallback" viewBox="0 0 640 400" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Ilustrácia oceľovej klenby Starej tržnice">
+            <rect width="640" height="400" fill="#efe9dd"/>
+            <rect y="330" width="640" height="70" fill="#e3dccd"/>
+            <g fill="none" stroke="#16203a" stroke-linecap="round">
+              <path d="M70 330V170A250 150 0 0 1 570 170V330" stroke-width="4"/>
+              <path d="M150 330V190A170 110 0 0 1 490 190V330" stroke-width="2.5" stroke-opacity=".5"/>
+              <path d="M70 230H570" stroke-width="2" stroke-opacity=".3"/>
+            </g>
+            <g stroke="#16203a" stroke-opacity=".25" stroke-width="2"><path d="M190 80L230 330M320 60V330M450 80L410 330"/></g>
+            <g fill="#e4572e"><circle cx="70" cy="170" r="7"/><circle cx="320" cy="20" r="9"/><circle cx="570" cy="170" r="7"/><circle cx="150" cy="190" r="6"/><circle cx="490" cy="190" r="6"/></g>
+            <rect x="250" y="250" width="140" height="80" rx="10" fill="#fffdf9" stroke="#16203a" stroke-width="3"/>
+          </svg>
+        </div>
+        <div class="venue-body">
+          <p class="label">Miesto</p>
+          <h2>Pod oceľovou klenbou Starej tržnice</h2>
+          <p>Historická tržnica z roku 1910 je dnes priestorom pre trhy, koncerty a konferencie. Sála na galérii je 2 minúty pešo od zastávky Námestie SNP.</p>
+          <ul class="venue-list">
+            <li><span>Adresa</span><span>Námestie SNP 25, Bratislava</span></li>
+            <li><span>Vstup</span><span>hlavný vchod, galéria 1. poschodie</span></li>
+            <li><span>MHD</span><span>Námestie SNP, Kamenné nám.</span></li>
+            <li><span>Bezbariérovo</span><span>výťah pri vchode</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VÝZVA -->
+  <section class="block" id="prihlasenie" style="padding-top:0">
+    <div class="wrap">
+      <div class="cta">
+        <svg class="cta-arch" viewBox="0 0 420 300" aria-hidden="true">
+          <g fill="none" stroke="#16203a" stroke-opacity=".18" stroke-width="2"><path d="M40 300V170A170 150 0 0 1 380 170V300"/><path d="M100 300V180A110 100 0 0 1 320 180V300"/></g>
+          <g fill="#e4572e" fill-opacity=".35"><circle cx="40" cy="170" r="6"/><circle cx="210" cy="20" r="8"/><circle cx="380" cy="170" r="6"/></g>
+        </svg>
+        <div>
+          <span class="seats">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3 20a6 6 0 0 1 12 0M16 4.5a3.5 3.5 0 0 1 0 7M21 20a6 6 0 0 0-3.5-5.5"/></svg>
+            120 miest, prideľujeme podľa poradia
+          </span>
+          <h2>Uvidíme sa<br>5. decembra?</h2>
+          <p>Sobota o 18:00 v Starej tržnici. Prihlásenie zaberie menej ako minútu, vstup je voľný.</p>
+        </div>
+        <div class="cta-side">
+          <a class="btn" href="#">Prihlásiť sa
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <small>Potvrdenie vám príde e-mailom.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Večer s AI · Bratislava</span>
+    <span class="credit">Fotka: interiér Starej tržnice, autor Hajotthu, <a href="https://commons.wikimedia.org/wiki/File:Bratislava_Star%C3%A1_tr%C5%BEnica@Old_Market_20180625.jpg">Wikimedia Commons</a>, licencia <a href="https://creativecommons.org/licenses/by-sa/3.0/">CC BY-SA 3.0</a>. Ostatné grafiky sú vlastné ilustrácie.</span>
+  </div>
+</footer>
+
+</body>
+</html>
